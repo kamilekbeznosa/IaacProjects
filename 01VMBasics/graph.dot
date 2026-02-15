@@ -1,0 +1,25 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "azurerm_linux_virtual_machine.vm" [label="azurerm_linux_virtual_machine.vm"];
+  "azurerm_network_interface.nic" [label="azurerm_network_interface.nic"];
+  "azurerm_network_interface_security_group_association.nic_watcher" [label="azurerm_network_interface_security_group_association.nic_watcher"];
+  "azurerm_network_security_group.watcher" [label="azurerm_network_security_group.watcher"];
+  "azurerm_public_ip.pip" [label="azurerm_public_ip.pip"];
+  "azurerm_resource_group.rg" [label="azurerm_resource_group.rg"];
+  "azurerm_subnet.subnet" [label="azurerm_subnet.subnet"];
+  "azurerm_virtual_network.vnet" [label="azurerm_virtual_network.vnet"];
+  "local_file.ssh_key_private" [label="local_file.ssh_key_private"];
+  "tls_private_key.ssh_key" [label="tls_private_key.ssh_key"];
+  "azurerm_linux_virtual_machine.vm" -> "azurerm_network_interface.nic";
+  "azurerm_linux_virtual_machine.vm" -> "tls_private_key.ssh_key";
+  "azurerm_network_interface.nic" -> "azurerm_public_ip.pip";
+  "azurerm_network_interface.nic" -> "azurerm_subnet.subnet";
+  "azurerm_network_interface_security_group_association.nic_watcher" -> "azurerm_network_interface.nic";
+  "azurerm_network_interface_security_group_association.nic_watcher" -> "azurerm_network_security_group.watcher";
+  "azurerm_network_security_group.watcher" -> "azurerm_resource_group.rg";
+  "azurerm_public_ip.pip" -> "azurerm_resource_group.rg";
+  "azurerm_subnet.subnet" -> "azurerm_virtual_network.vnet";
+  "azurerm_virtual_network.vnet" -> "azurerm_resource_group.rg";
+  "local_file.ssh_key_private" -> "tls_private_key.ssh_key";
+}

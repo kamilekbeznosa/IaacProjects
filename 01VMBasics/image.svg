@@ -1,0 +1,132 @@
+<svg width="1316pt" height="152pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="overflow: hidden; "><g id="viewport-20260215152250696" class="svg-pan-zoom_viewport" transform="matrix(0.6853995448372718,0,0,0.6853995448372718,-150.1170128497922,276.22856339119073)" style="transform: matrix(0.6854, 0, 0, 0.6854, -150.117, 276.229);">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-148 1312.15,-148 1312.15,4 -4,4"></polygon>
+<!-- azurerm_linux_virtual_machine.vm -->
+<g id="node1" class="node">
+<title>azurerm_linux_virtual_machine.vm</title>
+<polygon fill="none" stroke="black" points="1215.25,-90 998.26,-90 998.26,-54 1215.25,-54 1215.25,-90"></polygon>
+<text text-anchor="middle" x="1106.75" y="-67.8" font-family="sans-serif" font-size="14.00">azurerm_linux_virtual_machine.vm</text>
+</g>
+<!-- azurerm_network_interface.nic -->
+<g id="node2" class="node">
+<title>azurerm_network_interface.nic</title>
+<polygon fill="none" stroke="black" points="869.36,-95 678.07,-95 678.07,-59 869.36,-59 869.36,-95"></polygon>
+<text text-anchor="middle" x="773.71" y="-72.8" font-family="sans-serif" font-size="14.00">azurerm_network_interface.nic</text>
+</g>
+<!-- azurerm_linux_virtual_machine.vm&#45;&gt;azurerm_network_interface.nic -->
+<g id="edge1" class="edge">
+<title>azurerm_linux_virtual_machine.vm-&gt;azurerm_network_interface.nic</title>
+<path fill="none" stroke="black" d="M997.82,-73.63C960.37,-74.2 918.43,-74.83 881.11,-75.39"></path>
+<polygon fill="black" stroke="black" points="881.14,-71.89 871.2,-75.54 881.25,-78.89 881.14,-71.89"></polygon>
+</g>
+<!-- tls_private_key.ssh_key -->
+<g id="node10" class="node">
+<title>tls_private_key.ssh_key</title>
+<polygon fill="none" stroke="black" points="849.17,-37 698.25,-37 698.25,-1 849.17,-1 849.17,-37"></polygon>
+<text text-anchor="middle" x="773.71" y="-14.8" font-family="sans-serif" font-size="14.00">tls_private_key.ssh_key</text>
+</g>
+<!-- azurerm_linux_virtual_machine.vm&#45;&gt;tls_private_key.ssh_key -->
+<g id="edge2" class="edge">
+<title>azurerm_linux_virtual_machine.vm-&gt;tls_private_key.ssh_key</title>
+<path fill="none" stroke="black" d="M997.93,-58.73C967.9,-54.69 935.31,-49.99 905.36,-45 890.91,-42.59 875.61,-39.78 860.77,-36.92"></path>
+<polygon fill="black" stroke="black" points="861.5,-33.5 851.01,-35.01 860.16,-40.37 861.5,-33.5"></polygon>
+</g>
+<!-- azurerm_public_ip.pip -->
+<g id="node5" class="node">
+<title>azurerm_public_ip.pip</title>
+<polygon fill="none" stroke="black" points="640.9,-43 497.77,-43 497.77,-7 640.9,-7 640.9,-43"></polygon>
+<text text-anchor="middle" x="569.34" y="-20.8" font-family="sans-serif" font-size="14.00">azurerm_public_ip.pip</text>
+</g>
+<!-- azurerm_network_interface.nic&#45;&gt;azurerm_public_ip.pip -->
+<g id="edge3" class="edge">
+<title>azurerm_network_interface.nic-&gt;azurerm_public_ip.pip</title>
+<path fill="none" stroke="black" d="M700.79,-58.52C685.1,-54.49 668.38,-50.19 652.33,-46.07"></path>
+<polygon fill="black" stroke="black" points="653.37,-42.72 642.81,-43.62 651.63,-49.5 653.37,-42.72"></polygon>
+</g>
+<!-- azurerm_subnet.subnet -->
+<g id="node7" class="node">
+<title>azurerm_subnet.subnet</title>
+<polygon fill="none" stroke="black" points="642.07,-97 496.61,-97 496.61,-61 642.07,-61 642.07,-97"></polygon>
+<text text-anchor="middle" x="569.34" y="-74.8" font-family="sans-serif" font-size="14.00">azurerm_subnet.subnet</text>
+</g>
+<!-- azurerm_network_interface.nic&#45;&gt;azurerm_subnet.subnet -->
+<g id="edge4" class="edge">
+<title>azurerm_network_interface.nic-&gt;azurerm_subnet.subnet</title>
+<path fill="none" stroke="black" d="M677.75,-77.94C669.74,-78.02 661.69,-78.1 653.78,-78.18"></path>
+<polygon fill="black" stroke="black" points="653.81,-74.67 643.84,-78.27 653.87,-81.67 653.81,-74.67"></polygon>
+</g>
+<!-- azurerm_network_interface_security_group_association.nic_watcher -->
+<g id="node3" class="node">
+<title>azurerm_network_interface_security_group_association.nic_watcher</title>
+<polygon fill="none" stroke="black" points="1308.15,-144 905.36,-144 905.36,-108 1308.15,-108 1308.15,-144"></polygon>
+<text text-anchor="middle" x="1106.75" y="-121.8" font-family="sans-serif" font-size="14.00">azurerm_network_interface_security_group_association.nic_watcher</text>
+</g>
+<!-- azurerm_network_interface_security_group_association.nic_watcher&#45;&gt;azurerm_network_interface.nic -->
+<g id="edge5" class="edge">
+<title>azurerm_network_interface_security_group_association.nic_watcher-&gt;azurerm_network_interface.nic</title>
+<path fill="none" stroke="black" d="M964.17,-107.52C944.4,-104.76 924.36,-101.88 905.36,-99 897.39,-97.79 889.15,-96.5 880.86,-95.18"></path>
+<polygon fill="black" stroke="black" points="881.48,-91.73 871.05,-93.59 880.37,-98.64 881.48,-91.73"></polygon>
+</g>
+<!-- azurerm_network_security_group.watcher -->
+<g id="node4" class="node">
+<title>azurerm_network_security_group.watcher</title>
+<polygon fill="none" stroke="black" points="460.61,-144 207.09,-144 207.09,-108 460.61,-108 460.61,-144"></polygon>
+<text text-anchor="middle" x="333.85" y="-121.8" font-family="sans-serif" font-size="14.00">azurerm_network_security_group.watcher</text>
+</g>
+<!-- azurerm_network_interface_security_group_association.nic_watcher&#45;&gt;azurerm_network_security_group.watcher -->
+<g id="edge6" class="edge">
+<title>azurerm_network_interface_security_group_association.nic_watcher-&gt;azurerm_network_security_group.watcher</title>
+<path fill="none" stroke="black" d="M904.97,-126C768.94,-126 592.73,-126 472.45,-126"></path>
+<polygon fill="black" stroke="black" points="472.5,-122.5 462.5,-126 472.5,-129.5 472.5,-122.5"></polygon>
+</g>
+<!-- azurerm_resource_group.rg -->
+<g id="node6" class="node">
+<title>azurerm_resource_group.rg</title>
+<polygon fill="none" stroke="black" points="171.09,-90 0,-90 0,-54 171.09,-54 171.09,-90"></polygon>
+<text text-anchor="middle" x="85.55" y="-67.8" font-family="sans-serif" font-size="14.00">azurerm_resource_group.rg</text>
+</g>
+<!-- azurerm_network_security_group.watcher&#45;&gt;azurerm_resource_group.rg -->
+<g id="edge7" class="edge">
+<title>azurerm_network_security_group.watcher-&gt;azurerm_resource_group.rg</title>
+<path fill="none" stroke="black" d="M246.24,-107.51C233.12,-104.68 219.74,-101.77 207.09,-99 198.23,-97.06 189.01,-95.02 179.78,-92.97"></path>
+<polygon fill="black" stroke="black" points="180.55,-89.55 170.03,-90.8 179.03,-96.39 180.55,-89.55"></polygon>
+</g>
+<!-- azurerm_public_ip.pip&#45;&gt;azurerm_resource_group.rg -->
+<g id="edge8" class="edge">
+<title>azurerm_public_ip.pip-&gt;azurerm_resource_group.rg</title>
+<path fill="none" stroke="black" d="M497.4,-25.48C424.32,-26.78 307.26,-31.11 207.09,-45 195.3,-46.64 182.96,-48.83 170.85,-51.27"></path>
+<polygon fill="black" stroke="black" points="170.38,-47.79 161.31,-53.25 171.81,-54.64 170.38,-47.79"></polygon>
+</g>
+<!-- azurerm_virtual_network.vnet -->
+<g id="node8" class="node">
+<title>azurerm_virtual_network.vnet</title>
+<polygon fill="none" stroke="black" points="426.79,-90 240.91,-90 240.91,-54 426.79,-54 426.79,-90"></polygon>
+<text text-anchor="middle" x="333.85" y="-67.8" font-family="sans-serif" font-size="14.00">azurerm_virtual_network.vnet</text>
+</g>
+<!-- azurerm_subnet.subnet&#45;&gt;azurerm_virtual_network.vnet -->
+<g id="edge9" class="edge">
+<title>azurerm_subnet.subnet-&gt;azurerm_virtual_network.vnet</title>
+<path fill="none" stroke="black" d="M496.38,-76.84C478.12,-76.3 458.14,-75.7 438.65,-75.11"></path>
+<polygon fill="black" stroke="black" points="438.86,-71.62 428.76,-74.82 438.65,-78.61 438.86,-71.62"></polygon>
+</g>
+<!-- azurerm_virtual_network.vnet&#45;&gt;azurerm_resource_group.rg -->
+<g id="edge10" class="edge">
+<title>azurerm_virtual_network.vnet-&gt;azurerm_resource_group.rg</title>
+<path fill="none" stroke="black" d="M240.44,-72C221.58,-72 201.7,-72 182.72,-72"></path>
+<polygon fill="black" stroke="black" points="182.86,-68.5 172.86,-72 182.86,-75.5 182.86,-68.5"></polygon>
+</g>
+<!-- local_file.ssh_key_private -->
+<g id="node9" class="node">
+<title>local_file.ssh_key_private</title>
+<polygon fill="none" stroke="black" points="1188.42,-36 1025.08,-36 1025.08,0 1188.42,0 1188.42,-36"></polygon>
+<text text-anchor="middle" x="1106.75" y="-13.8" font-family="sans-serif" font-size="14.00">local_file.ssh_key_private</text>
+</g>
+<!-- local_file.ssh_key_private&#45;&gt;tls_private_key.ssh_key -->
+<g id="edge11" class="edge">
+<title>local_file.ssh_key_private-&gt;tls_private_key.ssh_key</title>
+<path fill="none" stroke="black" d="M1024.77,-18.24C975.03,-18.39 911.37,-18.59 860.73,-18.74"></path>
+<polygon fill="black" stroke="black" points="860.98,-15.24 850.99,-18.77 861,-22.24 860.98,-15.24"></polygon>
+</g>
+</g>
+</g></svg>
