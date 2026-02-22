@@ -89,3 +89,11 @@ module "agw" {
   location            = azurerm_resource_group.rg.location
   subnet_id           = module.Networking.snet_agw_id
 }
+
+module "vpn" {
+  source              = "../../Modules/vpn"
+  env                 = "dev"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  subnet_id           = module.Networking.snet_vpn_id
+}
