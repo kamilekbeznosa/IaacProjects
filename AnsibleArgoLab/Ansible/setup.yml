@@ -1,0 +1,76 @@
+---
+- name: Setup basic serves
+  hosts: all
+  become: true
+
+  tasks:
+    - name: TimeZone
+      timezone:
+        name: "Europe/Warsaw"
+
+    - name: Install APT
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install neccesities and java
+      apt:
+        name: 
+          - git
+          - curl
+          - wget
+          - unzip
+          - htop
+          - openjdk-17-jre
+        state: present
+
+- name: Instalacja serwera Jenkins
+  hosts: jenkins_master
+  become: yes
+  
+  tasks:
+    - name: Usuniecie ewentualnych starych, zepsutych list repozytoriow
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_fileglob:
+        - /etc/apt/sources.list.d/*jenkins*.list
+        - /etc/apt/sources.list.d/archive_uri_https_pkg_jenkins_io*.list
+
+    - name: Pobranie klucza GPG Jenkinsa
+      get_url:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        dest: /usr/share/keyrings/jenkins-keyring.asc
+        mode: '0644'
+        force: yes
+
+    - name: Dodanie repozytorium Jenkinsa
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+        state: present
+        filename: jenkins
+        update_cache: yes
+
+    - name: Instalacja pakietu Jenkins
+      apt:
+        name: jenkins
+        state: present
+
+    - name: Upewnienie sie, ze Jenkins dziala i startuje z systemem
+      systemd:
+        name: jenkins
+        state: started
+        enabled: yes
+
+    - name: Czekanie 15 sekund na wygenerowanie hasla przez Jenkinsa
+      pause:
+        seconds: 15
+
+    - name: Odczytanie poczatkowego hasla administratora
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: jenkins_password
+      changed_when: false
+
+    - name: Wyswietlenie hasla na ekranie
+      debug:
+        msg: "Twoje poczatkowe haslo do Jenkinsa to: {{ jenkins_password.stdout }}"

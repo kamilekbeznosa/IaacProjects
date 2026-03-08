@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  (1..2).each do |i|
+    config.vm.define "server-#{i}" do |node|
+      node.vm.hostname = "server-#{i}"
+    
+      node.vm.network "private_network", ip: "192.168.56.1#{i}"
+
+      node.vm.provider "virtualbox" do |vb|
+        vb.name = "Jenkins-Node-#{i}"
+        vb.memory = "1536"
+        vb.cpus = 1
+      end
+    end
+  end
+end
