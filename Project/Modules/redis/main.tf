@@ -10,12 +10,12 @@ resource "azurerm_redis_cache" "redis" {
   resource_group_name = var.resource_group_name
   capacity            = 1
   family              = "C"
-  
-  sku_name            = "Standard" 
-  
+
+  sku_name = "Standard"
+
   non_ssl_port_enabled = false
-  minimum_tls_version = "1.2"
-  
+  minimum_tls_version  = "1.2"
+
   public_network_access_enabled = false
 
   redis_configuration {

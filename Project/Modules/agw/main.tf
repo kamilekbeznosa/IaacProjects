@@ -19,7 +19,7 @@ resource "azurerm_application_gateway" "agw" {
 
   gateway_ip_configuration {
     name      = "agw-ip-config"
-    subnet_id = var.subnet_id 
+    subnet_id = var.subnet_id
   }
 
   frontend_port {

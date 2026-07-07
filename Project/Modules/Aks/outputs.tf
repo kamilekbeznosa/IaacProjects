@@ -16,5 +16,5 @@ output "kubelet_identity_object_id" {
 }
 
 output "ingress_identity_object_id" {
-  value       = azurerm_kubernetes_cluster.aks.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
+  value = azurerm_kubernetes_cluster.aks.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
 }

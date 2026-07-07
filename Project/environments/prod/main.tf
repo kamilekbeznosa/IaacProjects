@@ -10,11 +10,11 @@ resource "azurerm_resource_group" "rg" {
 module "Networking" {
   source = "../../Modules/Networking"
 
-  env = "dev"
-  rg_name = azurerm_resource_group.rg.name
+  env      = "dev"
+  rg_name  = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
 
-  vnet_cidr   = var.vnet_cidr
+  vnet_cidr    = var.vnet_cidr
   subnet_cidrs = var.subnet_cidrs
 }
 
@@ -24,7 +24,7 @@ module "database" {
   env                 = "dev"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  
-  subnet_id           = module.networking.snet_data_id
-  vnet_id             = module.networking.vnet_id
+
+  subnet_id = module.networking.snet_data_id
+  vnet_id   = module.networking.vnet_id
 }
