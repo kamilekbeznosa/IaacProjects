@@ -1,4 +1,9 @@
 # ☁️ Finflow - Enterprise Azure & Kubernetes DevOps Infrastructure
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![Microsoft Azure](https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ![Architecture Diagram](diagram.png) ## 📖 Project Overview
 Finflow is a comprehensive cloud infrastructure project based on the **Infrastructure as Code (IaC)** approach. It simulates a secure, scalable enterprise environment for a financial application. 
