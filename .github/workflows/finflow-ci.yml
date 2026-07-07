@@ -1,0 +1,65 @@
+name: Finflow Terraform CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Project/**'
+      - '.github/workflows/finflow-ci.yml'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'Project/**'
+
+jobs:
+  terraform-checks:
+    name: Terraform Format, Validate & TFLint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Project
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        id: fmt
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend=false
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: latest
+
+      - name: TFLint Init
+        run: tflint --init
+
+      - name: TFLint Run
+        run: tflint -f compact
+
+  security-scan:
+    name: Checkov Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ./Project
+          framework: terraform
+          quiet: true
+          soft_fail: true
