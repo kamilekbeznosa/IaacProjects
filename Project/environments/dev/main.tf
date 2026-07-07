@@ -36,15 +36,15 @@ module "aks" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   agw_id              = module.agw.agw_id
-  subnet_id = module.Networking.snet_aks_id
+  subnet_id           = module.Networking.snet_aks_id
 }
 
 resource "azurerm_role_assignment" "aks_agic_contributor" {
-  principal_id         = module.aks.ingress_identity_object_id
+  principal_id                     = module.aks.ingress_identity_object_id
   role_definition_name             = "Contributor"
   scope                            = module.agw.agw_id
   skip_service_principal_aad_check = true
-  
+
 }
 
 module "acr" {
@@ -75,11 +75,11 @@ module "redis" {
   source = "../../modules/redis"
 
   env                 = "dev"
-  resource_group_name = azurerm_resource_group.rg.name 
+  resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  
-  subnet_id           = module.Networking.snet_pe_id
-  vnet_id             = module.Networking.vnet_id
+
+  subnet_id = module.Networking.snet_pe_id
+  vnet_id   = module.Networking.vnet_id
 }
 
 module "agw" {
