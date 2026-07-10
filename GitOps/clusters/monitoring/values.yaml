@@ -1,0 +1,15 @@
+kube-prometheus-stack:
+  grafana:
+    adminPassword: ""
+    admin:
+      existingSecret: "grafana-admin-credentials"
+      userKey: admin-user
+      passwordKey: admin-password
+      
+    defaultDashboardsTimezone: Europe/Warsaw
+  
+  defaultRules:
+    create: true
+    rules:
+      kubeApiserverAvailability: false
+      kubeApiserverSlos: false
