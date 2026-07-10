@@ -13,3 +13,4 @@ kube-prometheus-stack:
     rules:
       kubeApiserverAvailability: false
       kubeApiserverSlos: false
+      # Fix: wymuszenie restartu webhookow w ArgoCD
