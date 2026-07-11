@@ -196,9 +196,6 @@ This platform is designed not only to collect telemetry but to **detect failures
 Alert (Webhook)  →  Grafana (metrics confirm)  →  Loki (logs pinpoint)  →  Git fix  →  ArgoCD sync
 ```
 
-![RCA — correlated metrics and logs](img/rca-metrics-and-logs.png)
-*Correlating the alert timestamp with Loki log entries narrows root cause to a specific endpoint or exception.*
-
 ---
 
 ## Prerequisites
@@ -212,7 +209,15 @@ Alert (Webhook)  →  Grafana (metrics confirm)  →  Loki (logs pinpoint)  → 
 
 ## Quick Start
 
-### 1. Bootstrap ArgoCD (root Application)
+### 1. Install ArgoCD
+
+Before applying GitOps manifests, ArgoCD must be installed on the cluster:
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f [https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml](https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml)
+```
+
+### 2. Bootstrap ArgoCD (root Application)
 
 ```bash
 kubectl apply -f GitOps/bootstrap/root-app.yaml
@@ -220,7 +225,7 @@ kubectl apply -f GitOps/bootstrap/root-app.yaml
 
 ArgoCD will discover and sync all Applications under `GitOps/apps/`.
 
-### 2. Verify sync status
+### 3. Verify sync status
 
 ```bash
 kubectl get applications -n argocd
@@ -230,7 +235,7 @@ All Applications should reach `Synced` / `Healthy`.
 
 ![Terminal — ArgoCD applications status](img/terminal-argocd-status.png)
 
-### 3. Port-forward Grafana (local access)
+### 4. Port-forward Grafana (local access)
 
 ```bash
 kubectl port-forward svc/kube-prometheus-stack-grafana -n monitoring 3000:80
@@ -238,14 +243,14 @@ kubectl port-forward svc/kube-prometheus-stack-grafana -n monitoring 3000:80
 
 Open `http://localhost:3000` and import / open the Golden Signals dashboard.
 
-### 4. Trigger a load test
+### 5. Trigger a load test
 
 ```bash
 kubectl apply -f GitOps/apps/k6-job.yaml
 kubectl logs -f job/k6-load-test -n default
 ```
 
-### 5. Simulate an incident (optional)
+### 6. Simulate an incident (optional)
 
 Modify the k6 script target URL to a non-existent path, re-apply the Job, and observe the alert pipeline end to end.
 
