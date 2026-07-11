@@ -10,11 +10,14 @@ spec:
     chart: loki
     targetRevision: 6.27.0
     helm:
+      parameters:
+        - name: loki.useTestSchema
+          value: "true"
+        - name: deploymentMode
+          value: SingleBinary
       values: |
-        deploymentMode: SingleBinary
         loki:
           auth_enabled: false
-          useTestSchema: true
           commonConfig:
             replication_factor: 1
           storage:
