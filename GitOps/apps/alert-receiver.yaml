@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: webhook-receiver
-  namespace: monitoring
+  namespace: default
 spec:
   route:
     groupBy: ['alertname']
