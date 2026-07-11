@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /source
 
-COPY FinflowTelemetry.sln .
+COPY FinflowTelemetry.slnx .
 COPY Telemetry-Api/Telemetry-Api.csproj ./Telemetry-Api/
 COPY Test/Test.csproj ./Test/
 
