@@ -15,11 +15,11 @@ spec:
           value: "true"
         - name: deploymentMode
           value: SingleBinary
+        - name: chunksCache.enabled
+          value: "false"
+        - name: resultsCache.enabled
+          value: "false"
       values: |
-        chunksCache:
-          enabled: false
-        resultsCache:
-          enabled: false
         loki:
           auth_enabled: false
           commonConfig:
