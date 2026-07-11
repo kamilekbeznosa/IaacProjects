@@ -9,7 +9,7 @@ spec:
     repoURL: https://grafana.github.io/helm-charts
     chart: loki
     targetRevision: 6.27.0
-  helm:
+    helm:
       parameters:
         - name: loki.useTestSchema
           value: "true"
@@ -26,6 +26,10 @@ spec:
             replication_factor: 1
           storage:
             type: filesystem
+            bucketNames:
+              chunks: chunks
+              ruler: ruler
+              admin: admin
         write:
           replicas: 0
         read:
