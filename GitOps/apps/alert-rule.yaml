@@ -4,7 +4,7 @@ metadata:
   name: telemetry-api-alerts
   namespace: monitoring
   labels:
-    release: prometheus
+    release: monitoring
 spec:
   groups:
   - name: telemetry.rules
