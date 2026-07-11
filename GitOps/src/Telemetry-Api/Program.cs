@@ -19,4 +19,5 @@ app.Run();
 public static class MessageHelper
 {
     public static string GetWelcomeMessage() => "Telemetry API is running!";
+    
 }
