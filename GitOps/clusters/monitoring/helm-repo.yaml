@@ -1,14 +1,11 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   name: grafana-repo
   namespace: argocd
   labels:
-    argocd.argoproj.io/config-management-plugin: helm
-apiVersion: argoproj.io/v1alpha1
-kind: Repository
-metadata:
-  name: grafana-charts
-spec:
+    argocd.argoproj.io/secret-type: repository
+stringData:
   type: helm
   url: https://grafana.github.io/helm-charts
+  name: grafana-charts
