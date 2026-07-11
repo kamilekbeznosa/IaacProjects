@@ -1,0 +1,86 @@
+name: CI/CD Pipeline - Telemetry API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  MANIFEST_PATH: GitOps/clusters/telemetry-api/deployment.yaml 
+
+jobs:
+  build-test-push-update:
+    name: Build, Test, Push and Update GitOps
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Run Unit Tests
+        run: dotnet test src/FinflowTelemetry.sln --configuration Release
+
+      - name: Format image name
+        run: echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
+      - name: Generate unique tag
+        id: vars
+        run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./src
+          push: ${{ github.event_name == 'push' }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMMIT_SHA }}
+
+      - name: Update manifest in GitOps
+        if: github.event_name == 'push'
+        run: |
+          if [ -f "${{ env.MANIFEST_PATH }}" ]; then
+            sed -i "s|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:.*|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMMIT_SHA }}|g" ${{ env.MANIFEST_PATH }}
+            echo "Manifest updated successfully."
+          else
+            echo "Warning: Manifest file not found at ${{ env.MANIFEST_PATH }}. Skipping update."
+          fi
+
+      - name: Commit and push GitOps changes
+        if: github.event_name == 'push'
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          
+          if git diff --exit-code; then
+            echo "No changes to commit in manifest."
+          else
+            git commit -am "ci: update telemetry-api image tag to ${{ env.COMMIT_SHA }} [skip ci]"
+            git push
+          fi

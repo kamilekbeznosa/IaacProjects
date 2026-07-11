@@ -1,0 +1,17 @@
+# Skompilowane binarki (bardzo ważne, żeby Docker budował własne)
+**/bin/
+**/obj/
+
+# Ustawienia środowiska lokalnego (często zawierają sekrety)
+**/appsettings.Development.json
+**/.user.ini
+
+# Katalogi IDE i kontroli wersji
+.git/
+.vs/
+.vscode/
+
+# Inne śmieci
+*.md
+Dockerfile
+.dockerignore
