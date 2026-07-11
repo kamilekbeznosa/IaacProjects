@@ -9,13 +9,17 @@ spec:
     repoURL: https://grafana.github.io/helm-charts
     chart: loki
     targetRevision: 6.27.0
-    helm:
+  helm:
       parameters:
         - name: loki.useTestSchema
           value: "true"
         - name: deploymentMode
           value: SingleBinary
       values: |
+        chunksCache:
+          enabled: false
+        resultsCache:
+          enabled: false
         loki:
           auth_enabled: false
           commonConfig:
