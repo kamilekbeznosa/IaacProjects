@@ -4,7 +4,7 @@ An enterprise-style, fully declarative observability platform built on Kubernete
 
 The cluster state is the single source of truth in Git — no manual `kubectl apply`, no portal drift. Designed for **Azure Kubernetes Service (AKS)** or local clusters (**k3d** / **kind**).
 
-> **Portfolio context:** This is Project 1 in my DevOps portfolio monorepo. Future projects (Python automation, Ansible, AWS IaC) will live alongside it under the same repository.
+> **Portfolio context:** This is Project 1 in my DevOps portfolio monorepo. Future projects  will live alongside it under the same repository.
 
 ---
 
@@ -108,11 +108,9 @@ Key decisions:
 - **Explicit `targetRevision`** on Helm charts — reproducible, version-pinned deployments.
 - **Declarative enforcement** — resources removed from Git are pruned from the cluster.
 
-<!-- SCREENSHOT: ArgoCD UI — all Applications green (Healthy + Synced) -->
 ![ArgoCD — all applications synced](img/argocd-apps-synced.png)
 *ArgoCD dashboard showing all Applications in `Healthy` / `Synced` state.*
 
-<!-- SCREENSHOT (optional): ArgoCD Application details — telemetry-api sync status -->
 ![ArgoCD — application detail](img/argocd-app-detail.png)
 
 ---
@@ -126,7 +124,6 @@ Key decisions:
 - Relabels streams with `namespace`, `pod`, and `app` labels.
 - Forwards structured stdout logs to Loki.
 
-<!-- SCREENSHOT: Grafana Explore — Loki query showing telemetry-api logs -->
 ![Grafana Explore — Loki logs](img/grafana-loki-logs.png)
 *Query example: `{namespace="default", app="telemetry-api"}`*
 
@@ -148,11 +145,9 @@ PromQL example used in dashboards:
 rate(http_server_request_duration_seconds_count{job="telemetry-api"}[1m])
 ```
 
-<!-- SCREENSHOT: Grafana dashboard — Golden Signals with k6 traffic spike visible -->
 ![Grafana — Golden Signals dashboard](img/grafana-golden-signals.png)
 *Dashboard during k6 load test — note the RPS spike and latency graph.*
 
-<!-- SCREENSHOT (optional): Grafana — single panel zoom on error rate -->
 ![Grafana — error rate panel](img/grafana-error-rate.png)
 
 ---
@@ -165,7 +160,6 @@ A **k6 Job** runs inside the cluster and hits the in-cluster service `telemetry-
 k6 Job  →  telemetry-api-svc:8080  →  /metrics scraped by Prometheus  →  Grafana
 ```
 
-<!-- SCREENSHOT: k6 Job completed / logs showing VUs and request count -->
 ![k6 Job — load test output](img/k6-job-output.png)
 
 ---
@@ -174,11 +168,9 @@ k6 Job  →  telemetry-api-svc:8080  →  /metrics scraped by Prometheus  →  G
 
 A **PrometheusRule** (`ApiHighErrorRate`) evaluates error rates in real time. When the threshold is breached for more than one minute, **Alertmanager** fires and sends a JSON payload to an external **Webhook** (Discord, Telegram, Slack, or [webhook.site](https://webhook.site) for testing).
 
-<!-- SCREENSHOT: Webhook.site (or Discord/Telegram) showing the firing alert JSON payload -->
 ![Alertmanager — webhook payload](img/alertmanager-webhook-firing.png)
 *Alert payload with `"status": "firing"` — confirms end-to-end alert pipeline.*
 
-<!-- SCREENSHOT (optional): Prometheus — Alerts tab showing rule state -->
 ![Prometheus — active alerts](img/prometheus-alerts-firing.png)
 
 ---
@@ -204,7 +196,6 @@ This platform is designed not only to collect telemetry but to **detect failures
 Alert (Webhook)  →  Grafana (metrics confirm)  →  Loki (logs pinpoint)  →  Git fix  →  ArgoCD sync
 ```
 
-<!-- SCREENSHOT: Side-by-side or composite — Grafana error spike + Loki log entry for the same timestamp -->
 ![RCA — correlated metrics and logs](img/rca-metrics-and-logs.png)
 *Correlating the alert timestamp with Loki log entries narrows root cause to a specific endpoint or exception.*
 
@@ -237,7 +228,6 @@ kubectl get applications -n argocd
 
 All Applications should reach `Synced` / `Healthy`.
 
-<!-- SCREENSHOT: Terminal output of kubectl get applications -->
 ![Terminal — ArgoCD applications status](img/terminal-argocd-status.png)
 
 ### 3. Port-forward Grafana (local access)
@@ -271,36 +261,13 @@ This was not "copy-pasting YAML" — several real infrastructure problems had to
 | Loki Helm chart complexity | Forced `SingleBinary` mode + `schemaConfig` via ArgoCD `parameters` | Production Helm charts often need aggressive value overrides for small clusters |
 | Metrics not appearing in Grafana | ServiceMonitor + correct scrape labels on the .NET API | Backend instrumentation and K8s discovery must align on label conventions |
 | Alert noise | `for: 1m` duration on PrometheusRule | Alert thresholds need a sustained breach window to avoid flapping |
+| Firing alerts not reaching webhook | Aligned `AlertmanagerConfig` namespace with the target application (`default`) | Prometheus Operator enforces strict namespace isolation for alert routing by default |
 | Full request lifecycle visibility | .NET metrics → Prometheus → PromQL `rate()` → Grafana → Loki correlation | Observability is a pipeline, not a single tool |
 
 **Observability triad covered:**
 - **Logs** — Alloy → Loki
 - **Metrics** — .NET API → Prometheus → Grafana
 - **Alerts** — PrometheusRule → Alertmanager → Webhook
-
----
-
-## Skills Demonstrated
-
-Use these as CV / LinkedIn bullet points after linking this repo:
-
-- Built a **GitOps-managed observability platform** on Kubernetes using **ArgoCD** (App of Apps) and **Helm** for fully declarative deployments.
-- Deployed **kube-prometheus-stack**, **Grafana Loki**, and **Grafana Alloy** for centralized metrics and log aggregation.
-- Instrumented a **C# .NET 8 API** with native Prometheus metrics; built **Grafana dashboards** for Golden Signals (latency, traffic, errors, saturation).
-- Configured **Alertmanager** rules with **webhook notifications**; documented **incident-simulation runbooks** enabling rapid root-cause analysis via correlated metrics and logs.
-- Automated load testing with **k6** as a native Kubernetes Job against in-cluster services.
-
-**Technologies:** Kubernetes, Helm, ArgoCD, GitOps, Prometheus, Grafana, Loki, Grafana Alloy, Alertmanager, k6, C# .NET 10, Azure (AKS)
-
----
-
-## Screenshots Checklist
-
-Before publishing, add the following images under `img/`:
-
-| File | What to capture |
-|---|---|
-| `alertmanager-webhook-firing.png` | Webhook payload with `"status": "firing"` |
 
 ---
 

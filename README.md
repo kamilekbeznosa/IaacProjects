@@ -23,6 +23,7 @@ Click on the project name in the table below to navigate to the detailed documen
 | **[1. Finflow: Secure Cloud Infrastructure](Project/README.md)** | An advanced IaC project deploying a highly secure (Zero-Trust) microservices architecture on Azure. Features AKS configuration, Application Gateway with WAF, and databases isolated via Private Endpoints. | Terraform, Azure, Kubernetes, Docker |
 | **[2. Automated CI/CD Lab: Jenkins Cluster](AnsibleArgoLab/Ansible/README.md)** | A fully automated, local Master-Agent CI/CD environment. Demonstrates the use of Vagrant for dynamic machine provisioning and Ansible for hands-free system configuration and bootstrapping. | Ansible, Vagrant, Jenkins, Linux |
 | **[3. Azure VM Basics](01VMBasics/README.md)** | A foundational IaC project demonstrating the basics of infrastructure provisioning, remote state management, and strict network configuration (VNet, NSG) in the Azure cloud. | Terraform, Azure |
+| **[4. GitOps: Observability Platform](GitOps/README.md)** | A complete Cloud-Native monitoring pipeline deployed via ArgoCD (app-of-apps). Features a custom .NET API with native telemetry, centralized log aggregation (Loki/Alloy), metrics visualization (Prometheus/Grafana), and automated incident alerting. | Kubernetes, ArgoCD, Prometheus, Grafana, Loki |
 
 ---
 *This repository is continuously evolving. Upcoming features include GitOps integration (ArgoCD) and the expansion of CI/CD pipelines using Azure DevOps.*
