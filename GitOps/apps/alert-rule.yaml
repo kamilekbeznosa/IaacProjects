@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: telemetry-api-alerts
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  groups:
+  - name: telemetry.rules
+    rules:
+    - alert: ApiHighErrorRate
+      expr: rate(http_server_request_duration_seconds_count{job="telemetry-api-svc", http_response_status_code="404"}[1m]) > 0
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Wykryto błędy 404 w API!"
