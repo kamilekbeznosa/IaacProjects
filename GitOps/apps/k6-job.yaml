@@ -9,14 +9,14 @@ spec:
       containers:
       - name: k6
         image: loadimpact/k6
-        command: ["k6", "run", "-"]
+        command: ["/bin/sh", "-c"]
         args:
           - |
-            import http from 'k6/http';
-            import { sleep } from 'k6';
-            export const options = { vus: 10, duration: '30m' };
+            echo 'import http from "k6/http";
+            import { sleep } from "k6";
+            export const options = { vus: 10, duration: "30m" };
             export default function () {
-              http.get('http://telemetry-api-svc.default.svc.cluster.local');
+              http.get("http://telemetry-api-svc.default.svc.cluster.local");
               sleep(0.5);
-            }
+            }' > load-test.js && k6 run load-test.js
       restartPolicy: OnFailure
