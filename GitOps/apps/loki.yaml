@@ -1,34 +1,34 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: loki
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://grafana.github.io/helm-charts
-    chart: loki
-    targetRevision: 6.27.0
-    helm:
-      values: |
-        deploymentMode: SingleBinary
-        loki:
-          auth_enabled: false
-          commonConfig:
-            replication_factor: 1
-          storage:
-            type: filesystem
-        # Jawne wyłączenie pozostałych trybów, aby nie gryzły się z SingleBinary
-        write:
-          replicas: 0
-        read:
-          replicas: 0
-        backend:
-          replicas: 0
-        gateway:
-          enabled: false
-        singleBinary:
-          replicas: 1
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: loki
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://grafana.github.io/helm-charts
+#     chart: loki
+#     targetRevision: 6.27.0
+#     helm:
+#       values: |
+#         deploymentMode: SingleBinary
+#         loki:
+#           auth_enabled: false
+#           commonConfig:
+#             replication_factor: 1
+#           storage:
+#             type: filesystem
+#         # Jawne wyłączenie pozostałych trybów, aby nie gryzły się z SingleBinary
+#         write:
+#           replicas: 0
+#         read:
+#           replicas: 0
+#         backend:
+#           replicas: 0
+#         gateway:
+#           enabled: false
+#         singleBinary:
+#           replicas: 1
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: monitoring
