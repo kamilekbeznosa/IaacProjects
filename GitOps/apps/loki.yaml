@@ -7,28 +7,16 @@ spec:
   project: default
   source:
     repoURL: https://grafana.github.io/helm-charts
-    chart: loki
-    targetRevision: 6.27.0
+    chart: loki-simple-scalable
+    targetRevision: 1.16.1
     helm:
       values: |
-        deploymentMode: SingleBinary
         loki:
           auth_enabled: false
           commonConfig:
             replication_factor: 1
           storage:
             type: filesystem
-        # Jawne wyłączenie pozostałych trybów, aby nie gryzły się z SingleBinary
-        write:
-          replicas: 0
-        read:
-          replicas: 0
-        backend:
-          replicas: 0
-        gateway:
-          enabled: false
-        singleBinary:
-          replicas: 1
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
