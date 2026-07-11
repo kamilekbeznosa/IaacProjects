@@ -290,7 +290,7 @@ Use these as CV / LinkedIn bullet points after linking this repo:
 - Configured **Alertmanager** rules with **webhook notifications**; documented **incident-simulation runbooks** enabling rapid root-cause analysis via correlated metrics and logs.
 - Automated load testing with **k6** as a native Kubernetes Job against in-cluster services.
 
-**Technologies:** Kubernetes, Helm, ArgoCD, GitOps, Prometheus, Grafana, Loki, Grafana Alloy, Alertmanager, k6, C# .NET 8, Azure (AKS)
+**Technologies:** Kubernetes, Helm, ArgoCD, GitOps, Prometheus, Grafana, Loki, Grafana Alloy, Alertmanager, k6, C# .NET 10, Azure (AKS)
 
 ---
 

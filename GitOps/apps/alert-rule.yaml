@@ -5,6 +5,7 @@ metadata:
   namespace: monitoring
   labels:
     release: monitoring
+    app: kube-prometheus-stack
 spec:
   groups:
   - name: telemetry.rules
