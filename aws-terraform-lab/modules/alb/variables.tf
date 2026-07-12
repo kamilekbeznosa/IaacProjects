@@ -1,0 +1,5 @@
+variable "env" { type = string }
+variable "vpc_id" { type = string }
+variable "subnet_a_id" { type = string }
+variable "subnet_b_id" { type = string }
+variable "instance_id" { type = string }

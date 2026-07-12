@@ -1,0 +1,50 @@
+name: AWS Terraform CI & Security
+
+on:
+  push:
+    paths:
+      - 'aws-terraform-lab/**'
+      - '.github/workflows/aws-terraform-ci.yml'
+
+jobs:
+  validate-and-lint:
+    name: Terraform Validate & TFLint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aws-terraform-lab/environments/dev
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        
+      - name: Run TFLint
+        run: |
+          tflint --init
+          tflint
+
+      - name: Terraform Init & Validate
+        run: |
+          terraform init -backend=false
+          terraform validate
+          terraform fmt -check -recursive
+
+  security-scan:
+    name: Checkov Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: aws-terraform-lab/
+          framework: terraform
+          soft_fail: true
