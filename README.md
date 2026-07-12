@@ -1,6 +1,7 @@
 # Infrastructure as Code (IaC) & DevOps Portfolio
 [![Finflow Terraform CI](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/finflow-ci.yml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/finflow-ci.yml)
 [![Kube CI/CD](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ci-cd.yml)
+[![Ansible CI](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ansible-ci.yml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ansible-ci.yml)
 
 ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
 ![Ansible](https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white)
@@ -24,6 +25,7 @@ Click on the project name in the table below to navigate to the detailed documen
 | **[2. Automated CI/CD Lab: Jenkins Cluster](AnsibleArgoLab/Ansible/README.md)** | A fully automated, local Master-Agent CI/CD environment. Demonstrates the use of Vagrant for dynamic machine provisioning and Ansible for hands-free system configuration and bootstrapping. | Ansible, Vagrant, Jenkins, Linux |
 | **[3. Azure VM Basics](01VMBasics/README.md)** | A foundational IaC project demonstrating the basics of infrastructure provisioning, remote state management, and strict network configuration (VNet, NSG) in the Azure cloud. | Terraform, Azure |
 | **[4. GitOps: Observability Platform](GitOps/README.md)** | A complete Cloud-Native monitoring pipeline deployed via ArgoCD (app-of-apps). Features a custom .NET API with native telemetry, centralized log aggregation (Loki/Alloy), metrics visualization (Prometheus/Grafana), and automated incident alerting. | Kubernetes, ArgoCD, Prometheus, Grafana, Loki |
+| **[5. Ansible Configuration Management & Hardening](ansible-lab/README.md)** | Production-style configuration management with reusable Ansible roles: Ubuntu hardening (UFW, fail2ban, SSH), Dockerized app deployment, Nginx reverse proxy via Jinja2 templates, and Prometheus Node Exporter. Separate dev/prod inventories, Ansible Vault for secrets, and CI syntax-check via GitHub Actions. | Ansible, Jinja2, Docker, Nginx, Node Exporter, Linux |
 
 ---
-*This repository is continuously evolving. Upcoming features include GitOps integration (ArgoCD) and the expansion of CI/CD pipelines using Azure DevOps.*
+*This repository is continuously evolving. Current focus: multi-cloud expansion (AWS Terraform) and deeper GitOps automation.*

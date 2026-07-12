@@ -14,7 +14,7 @@ resource "azurerm_virtual_network_gateway" "vpn_gw" {
 
   type     = "Vpn"
   vpn_type = "RouteBased"
-  
+
   active_active = false
 
   sku = "Basic"
