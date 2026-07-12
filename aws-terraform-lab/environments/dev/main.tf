@@ -7,7 +7,7 @@ terraform {
     }
   }
 
-    backend "s3" {
+  backend "s3" {
     bucket         = "tf-state-kamilekbeznosa-portfolio"
     key            = "dev/terraform.tfstate"
     region         = "eu-central-1"

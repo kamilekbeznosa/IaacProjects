@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "static_assets" {
-  bucket = "${var.env}-static-assets-kamilekbeznosa" 
+  bucket = "${var.env}-static-assets-kamilekbeznosa"
 
   tags = {
     Name = "${var.env}-static-assets"

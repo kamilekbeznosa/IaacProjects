@@ -3,5 +3,5 @@ output "web_server_ip" {
 }
 
 output "alb_url" {
-  value       = "http://${module.alb.alb_dns_name}"
+  value = "http://${module.alb.alb_dns_name}"
 }
