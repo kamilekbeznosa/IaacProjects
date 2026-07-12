@@ -1,0 +1,9 @@
+---
+- name: Konfiguracja bazowa wszystkich serwerów
+  hosts: all
+  become: true
+  roles:
+    - common
+    - app
+    - nginx
+    - node_exporter

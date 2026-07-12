@@ -1,0 +1,54 @@
+---
+- name: Utworzenie dedykowanego użytkownika dla node_exporter
+  user:
+    name: node_exporter
+    system: yes
+    shell: /bin/false
+    create_home: no
+
+- name: Pobranie i rozpakowanie node_exporter
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+
+- name: Przeniesienie pliku binarnego do /usr/local/bin
+  copy:
+    src: /tmp/node_exporter-1.7.0.linux-amd64/node_exporter
+    dest: /usr/local/bin/
+    remote_src: yes
+    owner: node_exporter
+    group: node_exporter
+    mode: '0755'
+  notify: Restart node_exporter
+
+- name: Utworzenie pliku usługi systemd
+  copy:
+    dest: /etc/systemd/system/node_exporter.service
+    content: |
+      [Unit]
+      Description=Prometheus Node Exporter
+      After=network.target
+
+      [Service]
+      User=node_exporter
+      Group=node_exporter
+      Type=simple
+      ExecStart=/usr/local/bin/node_exporter
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: Restart node_exporter
+
+- name: Otwarcie portu 9100 w UFW (dla Prometheusa)
+  ufw:
+    rule: allow
+    port: '9100'
+    proto: tcp
+
+- name: Uruchomienie demona node_exporter
+  systemd:
+    name: node_exporter
+    state: started
+    enabled: yes
+    daemon_reload: yes

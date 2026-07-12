@@ -1,0 +1,45 @@
+---
+- name: Instalacja niezbędnych pakietów dla Dockera
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - python3-docker
+    state: present
+
+- name: Dodanie klucza GPG Dockera
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Dodanie repozytorium APT Dockera
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    update_cache: yes
+
+- name: Instalacja silnika Docker i wtyczek
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Upewnienie się, że Docker jest uruchomiony i włączony po restarcie
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Uruchomienie aplikacji webowej (Nginx jako przykład) w kontenerze Docker
+  docker_container:
+    name: web_app
+    image: nginx:alpine
+    state: started
+    restart_policy: always
+    ports:
+      - "8080:80"

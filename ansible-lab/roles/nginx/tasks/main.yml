@@ -1,0 +1,30 @@
+---
+- name: Instalacja serwera Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Usunięcie domyślnej strony Nginx
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload Nginx
+
+- name: Wgranie konfiguracji Reverse Proxy z szablonu Jinja2
+  template:
+    src: reverse_proxy.conf.j2
+    dest: /etc/nginx/sites-available/reverse_proxy.conf
+  notify: Reload Nginx
+
+- name: Włączenie konfiguracji
+  file:
+    src: /etc/nginx/sites-available/reverse_proxy.conf
+    dest: /etc/nginx/sites-enabled/reverse_proxy.conf
+    state: link
+  notify: Reload Nginx
+
+- name: Upewnienie się, że Nginx jest uruchomiony
+  service:
+    name: nginx
+    state: started
+    enabled: yes

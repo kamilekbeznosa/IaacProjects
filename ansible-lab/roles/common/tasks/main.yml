@@ -1,0 +1,42 @@
+---
+- name: Aktualizacja cache apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Instalacja podstawowych pakietów bezpieczeństwa
+  apt:
+    name:
+      - ufw
+      - fail2ban
+      - unattended-upgrades
+    state: present
+
+- name: Konfiguracja UFW (Firewall) - domyślnie blokuj wszystko
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: Otwarcie niezbędnych portów w UFW
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - '22'
+    - '80'
+    - '443'
+
+- name: Zabezpieczenie SSH - wyłączenie logowania hasłem
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+  notify: Restart SSH
+
+- name: Zabezpieczenie SSH - wyłączenie logowania jako root
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify: Restart SSH
