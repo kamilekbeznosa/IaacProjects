@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: telemetry-api
-          image: ghcr.io/kamilekbeznosa/iaacprojects:5589026
+          image: ghcr.io/kamilekbeznosa/iaacprojects:8e8a304
           ports:
             - containerPort: 8080
               name: http-web
