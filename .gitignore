@@ -17,6 +17,8 @@ ssh/
 *.key
 id_rsa*
 
+venv
+
 # Pliki tymczasowe Ansible
 *.retry
 .ansible/
