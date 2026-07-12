@@ -1,7 +1,7 @@
 # Infrastructure as Code (IaC) & DevOps Portfolio
 [![Finflow Terraform CI](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/finflow-ci.yml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/finflow-ci.yml)
 [![Kube CI/CD](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ci-cd.yml)
-[![Ansible CI](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ansible-ci.yml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ansible-ci.yml)
+[![Ansible CI](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ansible-ci.yaml/badge.svg)](https://github.com/kamilekbeznosa/IaacProjects/actions/workflows/ansible-ci.yaml)
 
 ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
 ![Ansible](https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white)
